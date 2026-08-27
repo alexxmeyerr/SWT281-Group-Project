@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace TarmacControl.Exeptions
 {
-    internal class ServiceOutOfSequenceException: Exception
+    internal class AircraftNotFoundException: Exception
     {
-        public ServiceOutOfSequenceException(string message) : base(message) { }
-
+        public AircraftNotFoundException(string message) : base(message)
+        {
+        }
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace TarmacControl.Exeptions
 {
-    internal class GateOccupiedException
+    internal class GateOccupiedException: Exception
     {
+        public GateOccupiedException(string message) : base(message)
+        { 
+        
+        }
     }
 }

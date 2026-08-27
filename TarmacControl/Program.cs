@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using TarmacControl.Entities;
+using TarmacControl.Management;
 using TarmacControl.UI;
 
 namespace TarmacControl
@@ -14,84 +19,46 @@ namespace TarmacControl
             //set the program to still keep running. So the exit option was not selected
             bool isRunning = true;
 
+            //passes the airportmanger to the monitoringSetvice and starts the service on a background thread
+            ConsoleMenu menu = new ConsoleMenu();
+
+            ConsoleMenu.SubscribeToEvents(menu.AirportManager);
+
+            //creates monitoringService and give it the AiportManger used by the menu
+            MonitoringService monitoring = new MonitoringService(menu.AirportManager); 
+
+            //to start the background thread in the Monitoring service
+            monitoring.Start();
+
             //while the program is still running display the menu
             while (isRunning)
             {
-                //call the method that will display the menu
                 DisplayDefaultMenu();
-
-                //ask the user to select the option
                 Console.WriteLine("\nInput the number that best described the action you want to perform.\n");
                 string input = Console.ReadLine();
 
                 if (int.TryParse(input, out int choice) && Enum.IsDefined(typeof(MenuOption), choice))
                 {
                     MenuOption selected = (MenuOption)choice;
-                    ManageSelection(selected);
+                    isRunning = menu.ManageSelection(selected);
                 }
             }
+
         }
         //set a method that will display the default menu
         static void DisplayDefaultMenu()
         {
-            //clear the console of any remaining info
-            Console.Clear();
-
-            //Start writing the prompt and info for the menu
-            Console.WriteLine("===================== Welcome to TarmacControl =====================");
-            
-
-            //Display the menu
-            foreach(MenuOption option in Enum.GetValues(typeof(MenuOption)))
-            {
-                Console.WriteLine($"{(int)option}. {option.GetDescription()}"); //call the get description method
-            }
+            Console.WriteLine("\n===================== Welcome to TarmacControl =====================");
+            Console.WriteLine("1. View all aircrafts");
+            Console.WriteLine("2. View all ground vehicles");
+            Console.WriteLine("3. Register new flight (creates Aircraft)");
+            Console.WriteLine("4. Register new vehicle (creates vehicle)");
+            Console.WriteLine("5. Dispatch a ground vehicle to an aircraft");
+            Console.WriteLine("6. Assign aircraft to gate/runway");
+            Console.WriteLine("7. Complete turnaround for an aircraft");
+            Console.WriteLine("8. View system event log");
+            Console.WriteLine("9. View Operational Reports");
+            Console.WriteLine("10. Exit");
         }
-
-        static void ManageSelection(MenuOption option)
-            {
-                switch (option)
-                {
-                    case MenuOption.ViewAllAircraft:
-                        //<< insert appropriate code >>
-                        break;
-
-                    case MenuOption.ViewAllVehicles:
-                        //<< insert appropriate code >>
-                    break;
-
-                    case MenuOption.RegisterAircraft:
-                        //<< insert appropriate code >>
-                        break;
-
-                    case MenuOption.DispatchVehicle:
-                        //<< insert appropriate code >>
-                        break;
-
-                    case MenuOption.AssignAircraft:
-                        //<< insert appropriate code >>
-                        break;
-
-                    case MenuOption.ViewEventLog:
-                        //<< insert appropriate code >>
-                        break;
-
-                    case MenuOption.SaveState:
-                        //<< insert appropriate code >>
-                        break;
-
-                    case MenuOption.LoadState:
-                        //insert display of all aircrafts
-                        break;
-
-                    case MenuOption.Exit:
-                        //insert display of all aircrafts
-                        break;
-
-                    default:
-                        Console.WriteLine("The option that you have selected is not valid");
-                        break;
-            }
-            }
     }
 }

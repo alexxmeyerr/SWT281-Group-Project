@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TarmacControl.Exeptions
 {
-    internal class InsufficientFuelException
+    internal class InsufficientFuelException :Exception
     {
+        public InsufficientFuelException(string message) : base(message) { }
     }
 }

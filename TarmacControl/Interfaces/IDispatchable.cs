@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TarmacControl.Interfaces
 {
-    internal class IDispatchable
+    internal interface IDispatchable
     {
+        bool isAvailable { get; }
+        void Dispatch(string destination);
+
     }
 }

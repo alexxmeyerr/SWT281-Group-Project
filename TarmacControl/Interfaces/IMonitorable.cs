@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TarmacControl.Interfaces
 {
-    internal class IMonitorable
+    internal interface IMonitorable
     {
+        string GetStatusReport();
     }
 }

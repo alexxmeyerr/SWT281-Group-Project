@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace TarmacControl.Exeptions
 {
-    internal class ServiceOutOfSequenceException: Exception
+    internal class InvalidGateAssignmentException: Exception
     {
-        public ServiceOutOfSequenceException(string message) : base(message) { }
+        public InvalidGateAssignmentException(string message) : base(message)
+        {
 
+        }
     }
 }

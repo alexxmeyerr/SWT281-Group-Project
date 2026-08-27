@@ -46,14 +46,18 @@
     <Compile Include="Entities\Aircraft.cs" />
     <Compile Include="Entities\BaggageCart.cs" />
     <Compile Include="Entities\CargoPlane.cs" />
-    <Compile Include="Entities\CeivingTruck.cs" />
+    <Compile Include="Entities\FuelTruck.cs" />
     <Compile Include="Entities\GroundVehicle.cs" />
     <Compile Include="Entities\PassengerJet.cs" />
     <Compile Include="Entities\PrivateJet.cs" />
     <Compile Include="Entities\PushbackTug.cs" />
-    <Compile Include="Events\EventArgs.cs" />
+    <Compile Include="Events\FlightDelayedEventArgs.cs" />
+    <Compile Include="Events\LowFuelEventArgs.cs" />
+    <Compile Include="Events\TurnaroundCompletedEventArgs.cs" />
+    <Compile Include="Exeptions\AircraftNotFoundException.cs" />
     <Compile Include="Exeptions\GateOccupiedException.cs" />
     <Compile Include="Exeptions\InsufficientFuelException.cs" />
+    <Compile Include="Exeptions\InvalidGateAssignmentException.cs" />
     <Compile Include="Exeptions\ServiceOutOfSequenceException.cs" />
     <Compile Include="Interfaces\IDispatchable.cs" />
     <Compile Include="Interfaces\IMonitorable.cs" />
@@ -61,6 +65,7 @@
     <Compile Include="Management\MonitoringService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestAccess.cs" />
     <Compile Include="UI\ConsoleMenu.cs" />
   </ItemGroup>
   <ItemGroup>
