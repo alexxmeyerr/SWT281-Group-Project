@@ -9,6 +9,7 @@ namespace TarmacControl.Entities
 {
     internal class PassengerJet: Aircraft
     {
+        private enum BoardingStatus { NotBoarding, FirstBoarding, Boarding, LastBoarding, UnknownStatus }
         private bool boarding;
         private double baggageWeight;
 
@@ -28,6 +29,34 @@ namespace TarmacControl.Entities
         public override string ToString()
         {
             return base.ToString() + $"Baggage weight: {baggageWeight}kg\n";
+        }
+
+        public BoardingStatus BoardingPassengers(List<int> boardingNumbers)
+        {
+            int processedBoardingNumber = 0;
+        
+            if (boardingNumbers != null)
+            {
+                foreach(int boardingNumber in boardingNumbers)
+                {
+                    processedBoardingNumber++;     
+                }
+        
+                if (processedBoardingNumber == 0)
+                    return BoardingStatus.NotBoarding;
+                else if (processedBoardingNumber == 1)
+                    return BoardingStatus.FirstBoarding;
+                else if (processedBoardingNumber > 1)
+                    return BoardingStatus.Boarding;
+                else if (processedBoardingNumber == boardingNumbers.Count)
+                    return BoardingStatus.LastBoarding;
+                else
+                    return BoardingStatus.NotBoarding;
+            }
+            else if(boardingNumbers == null)
+                return BoardingStatus.UnknownStatus;
+            
+            return BoardingStatus.UnknownStatus;
         }
     }
 }
